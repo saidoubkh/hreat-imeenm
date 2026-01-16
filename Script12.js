@@ -30,4 +30,19 @@ container.addEventListener('mouseleave', () => {
 // 3. ??? ????? (?????/????? ????)
 heart.addEventListener('click', () => {
     heart.classList.toggle('reveal');
+
+});
+// --- كود جديد لجعل الحركة تعمل باللمس على الهاتف ---
+
+container.addEventListener('touchmove', (e) => {
+    e.preventDefault(); // هذا السطر يمنع الشاشة من التحرك (Scroll) أثناء اللمس
+    let touch = e.touches[0]; // التقاط مكان الإصبع الأول
+    let xAxis = (window.innerWidth / 2 - touch.pageX) / 15;
+    let yAxis = (window.innerHeight / 2 - touch.pageY) / 15;
+    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+});
+
+container.addEventListener('touchend', (e) => {
+    card.style.transition = 'transform 0.5s ease';
+    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
 });
